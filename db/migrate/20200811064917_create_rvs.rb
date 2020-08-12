@@ -8,9 +8,13 @@ class CreateRvs < ActiveRecord::Migration[6.0]
       t.integer :height
       t.string :fuel_type
       t.integer :capacity
-      t.string :ammenities
+      t.boolean :air_conditioner
+      t.boolean :jacuzzi
+      t.boolean :shower
+      t.boolean :washer_dryer
+      t.boolean :internet
       t.integer :current_mile
-      t.bytea :image
+      t.binary :image
 
       t.timestamps
     end

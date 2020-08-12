@@ -10,7 +10,9 @@ class CreateCompanies < ActiveRecord::Migration[6.0]
       t.integer :business_open
       t.integer :business_close
       t.string :opearting_days
-      
+      t.binary :picture
+      t.binary :logo
+
       t.timestamps
     end
   end
