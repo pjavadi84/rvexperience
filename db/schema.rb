@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_11_070131) do
+ActiveRecord::Schema.define(version: 2020_08_15_021234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,8 +31,6 @@ ActiveRecord::Schema.define(version: 2020_08_11_070131) do
     t.integer "business_open"
     t.integer "business_close"
     t.string "opearting_days"
-    t.binary "picture"
-    t.binary "logo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -50,7 +48,6 @@ ActiveRecord::Schema.define(version: 2020_08_11_070131) do
     t.boolean "internet"
     t.boolean "kid_friendly"
     t.integer "physical_demand"
-    t.binary "image"
     t.integer "phone_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -94,7 +91,6 @@ ActiveRecord::Schema.define(version: 2020_08_11_070131) do
     t.boolean "washer_dryer"
     t.boolean "internet"
     t.integer "current_mile"
-    t.binary "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
