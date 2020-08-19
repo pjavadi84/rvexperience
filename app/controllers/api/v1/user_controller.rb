@@ -1,4 +1,7 @@
 class Api::v1::UserController < ApplicationController
+    before_action :authenticate_user!
+
+
     def index 
         @users = User.all
         render json: @users, status: 200
@@ -34,7 +37,17 @@ class Api::v1::UserController < ApplicationController
     end
 
     private 
-    def user_params
-        params.require(:user).permit(:first_name, :last_name, :age, :number_of_guests, :address, :city, :state, :country, :zipcode, :email, :phone_number)
-    end
+        def user_params
+            params.require(:user).permit(:first_name, :last_name, :age, :number_of_guests, :address, :city, :state, :country, :zipcode, :email, :phone_number)
+        end
+
+        def signup_params
+            params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+        end
+
+        def account_update_params
+            params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :current_password)
+        end
+
+
 end
