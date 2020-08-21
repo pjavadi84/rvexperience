@@ -40,6 +40,19 @@ class Api::v1::RvController < ApplicationController
         end
     end
 
+    def update
+        @rv = Rv.find(params[:id])
+        @rv.update(rv_params)
+        render json: @rv, status: 200
+    end
+
+    def destroy
+        @rv = Rv.find(params[:id])
+        @rv.destroy
+    end
+
+    
+
     private 
 
     def rv_params
