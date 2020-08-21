@@ -7,9 +7,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
 
-      resources :users do
+      resources :companies do
         resources :rvs
       end
+
+      resources :rvs, only: [:index, :show, :new, :create, :edit, :update]
 
       devise_scope :users do
         get 'login', to: 'devise/sessions#new'

@@ -10,7 +10,8 @@
     User.create({
         first_name: Faker::Name.unique.first_name,
         email: Faker::Internet.unique.email,
-        password: Faker::Internet.unique.email
+        password: Faker::Internet.unique.email,
+        last_name: Faker::Name.unique.last_name  
     }
         
     )
