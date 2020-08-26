@@ -4,7 +4,7 @@ class Company < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
     # has_many :destinations
-    has_many :rvs, through: :destinations
+    has_many :rvs
     has_many :reservations 
     has_many :users, through: :reservations
     has_many :likes

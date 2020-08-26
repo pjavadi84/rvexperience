@@ -11,7 +11,10 @@ Rails.application.routes.draw do
         resources :rvs
       end
 
-      resources :rvs, only: [:index, :show, :new, :create, :edit, :update]
+      resources :companies
+      resources :rvs
+
+      resources :users
 
       devise_scope :users do
         get 'login', to: 'devise/sessions#new'

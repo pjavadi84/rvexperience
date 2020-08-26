@@ -56,6 +56,6 @@ class Api::v1::RvController < ApplicationController
     private 
 
     def rv_params
-        params.require(:rv).permit(:make, :model, :length, :width, :height, :fuel_type, :capacity, :air_conditioner, :jacuzzi, :shower, :washer_dryer, :internet, :current_mile, :plate_number, :vin_number, :company_id)
+        params.require(:rv).permit(:make, :model, :length, :width, :height, :fuel_type, :capacity, :air_conditioner, :jacuzzi, :shower, :washer_dryer, :internet, :current_mile, :plate_number, :vin_number, :company_id, :image)
     end
 end

@@ -1,5 +1,5 @@
-class Api::v1::UserController < ApplicationController
-    before_action :authenticate_user!
+class Api::V1::UsersController < ApplicationController
+    # before_action :authenticate_user!
 
 
     def index 
@@ -22,18 +22,13 @@ class Api::v1::UserController < ApplicationController
             flash[:success] = "successfully created a user"
             render json: @user, status: 200
         else
-            render json: @users, status: 400
+            render json: @users, status: 200
         end
     end
 
     def update
         @user = User.find(params[:id])
         @user.update(user_params)
-
-    end
-
-    def destroy 
-
     end
 
     private 
@@ -48,7 +43,4 @@ class Api::v1::UserController < ApplicationController
         def account_update_params
             params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :current_password)
         end
-    end
-
-
 end
