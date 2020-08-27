@@ -38,6 +38,7 @@ group :development do
   # gem 'spring'
   # gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'devise'
+  gem "google-cloud-storage", "~> 1.11", require: false
 end
 
 gem 'backports', '~> 3.6', '>= 3.6.8'

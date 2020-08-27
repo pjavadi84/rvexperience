@@ -16,3 +16,9 @@
         
     )
 end
+
+200.times do 
+    Company.create({
+        
+    })
+end
