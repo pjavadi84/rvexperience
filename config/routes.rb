@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       end
 
       resources :companies
-      resources :rvs
+      
 
       resources :users
 

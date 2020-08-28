@@ -1,6 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-    # before_action :authenticate_user!
-
+    before_action :authenticate_user!
 
     def index 
         @users = User.all
@@ -29,6 +28,11 @@ class Api::V1::UsersController < ApplicationController
     def update
         @user = User.find(params[:id])
         @user.update(user_params)
+    end
+
+    def destroy
+        @user = User.find(params[:id])
+        @user.destroy
     end
 
     private 

@@ -1,4 +1,4 @@
-class Api::v1::RvController < ApplicationController
+class Api::V1::RvsController < ApplicationController
     def index
         if params[:company_id]
             @rvs = Company.find(params[:company_id]).rvs

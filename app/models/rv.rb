@@ -8,4 +8,6 @@ class Rv < ApplicationRecord
     belongs_to :company
 
     has_one_attached :image
+
+    accepts_nested_attributes_for :company
 end

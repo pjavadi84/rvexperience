@@ -1,5 +1,6 @@
 class Api::V1::CompaniesController < ApplicationController
     before_action :authenticate_company!
+    
 
     def index
         @companies = Company.all
@@ -26,6 +27,11 @@ class Api::V1::CompaniesController < ApplicationController
     def update
         @company = Company.find(params[:id])
         @company.update(company_params)
+    end
+
+    def destroy
+        @company = Company.find(params[:id])
+        @company.destroy
     end
 
     def rvs_index
