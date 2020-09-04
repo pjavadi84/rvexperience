@@ -3,4 +3,5 @@ class Destination < ApplicationRecord
     belongs_to :rv
     has_many :comments
     has_many :likes
+    belongs_to :reservation
 end

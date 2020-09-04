@@ -1,5 +1,5 @@
 class Reservation < ApplicationRecord
-    belongs_to :user 
+    belongs_to :user
+    has_many :destinations
     belongs_to :rv
-    belongs_to :company
 end

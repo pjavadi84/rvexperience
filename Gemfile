@@ -39,7 +39,9 @@ group :development do
   # gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'devise'
   # gem "google-cloud-storage", "~> 1.11", require: false
-  gem 'simple_token_authentication', '~> 1.0'
+  # gem 'simple_token_authentication', '~> 1.0'
+  gem 'fast_jsonapi'
+  gem 'active_model_serializers'
 end
 
 gem 'backports', '~> 3.6', '>= 3.6.8'

@@ -17,8 +17,8 @@
     )
 end
 
-200.times do 
-    Company.create({
-        
-    })
-end
+
+
+# (1..200).to_a.each do |user|
+#     User.find_or_create_by(first_name: "amirhossein", last_name: "Ghaffarkhan", age: 38, number_of_guests: 3, address: "3592 huntington blvd", city: "huntington")
+# end
