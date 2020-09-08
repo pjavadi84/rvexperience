@@ -12,6 +12,6 @@ class Company < ApplicationRecord
     # at  some point i want to render a page where user can like company
     # has_many :likes 
 
-    accepts_nested_attributes_for :rvs
+    accepts_nested_attributes_for :rvs, :reservations
     
 end

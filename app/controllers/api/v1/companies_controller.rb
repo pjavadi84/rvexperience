@@ -7,13 +7,10 @@ class Api::V1::CompaniesController < ApplicationController
         render json: @companies, status: 200
     end
 
-    def show
-        @company = Company.find_by_id(params[:id])
-    end
-
     def new
         @company = Company.new
-        @reservation = @company.reservations.build
+        @rv = @company.rvs.build
+        # @reservation = @company.reservations.build
     end
 
     def create
@@ -25,29 +22,31 @@ class Api::V1::CompaniesController < ApplicationController
         end
     end
 
+    def show
+        @company = Company.find_by_id(params[:id])
+        render json: @company, status: 200
+    end
+
+    
     def update
         @company = Company.find(params[:id])
         @company.update(company_params)
     end
 
     def destroy
-        @company = Company.find(params[:id])
+        @company = Company.find_by_id(params[:id])
         @company.destroy
     end
 
-    def rvs_index
-        @company = Company.find(params[:id])
-        @rvs = @company.rvs
-        render json: @rvs, status: 200
-    end
-
-    # def rv_new
-        
+    # def rvs_index
+    #     @company = Company.find(params[:id])
+    #     @rvs = @company.rvs
+    #     render json: @rvs, status: 200
     # end
 
 private
     def company_params
-        params.require(:company).permit(:name, :address, :city, :state, :zipcode, :phone_number, :business_open, :business_close, :operating_days, :email, :rv_attributes: [
+        params.require(:company).permit(:name, :address, :city, :state, :zipcode, :phone_number, :business_open, :business_close, :operating_days, :email, rv_attributes: [
             :make,
             :model, 
             :length,
@@ -63,21 +62,23 @@ private
             :current_mile,
             :plate_number,
             :vin_number,
-            :reservation_attributes:[
-                :start_date,
-                :end_date,
-                :pickup_location,
-                :dropoff_location,
-                :guest_quantity,
-                :rental_duration,
-                :price_per_night,
-                :subtotal,
-                :tax,
-                :coupon_code,
-                :discount_price,
-                :additional_notes
+                reservation_attributes: [
+                    :start_date,
+                    :end_date,
+                    :pickup_location,
+                    :dropoff_location,
+                    :guest_quantity,
+                    :rental_duration,
+                    :price_per_night,
+                    :subtotal,
+                    :tax,
+                    :coupon_code,
+                    :discount_price,
+                    :additional_notes
+                ]
             ]
-        ])
+            
+        )
     end
 
 end

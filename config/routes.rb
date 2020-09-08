@@ -1,19 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :companies, :controllers => {:companies => "companies"}
-  devise_for :users, :controllers => {:users => "users"}
   
-  devise_scope :users do
-    get 'login', to: 'devise/sessions#new'
-  end
-    
-  devise_scope :users do 
-    get 'signup', to: 'devise/registrations#new'
-  end
-
+  root to: 'users#index'
 
   namespace :api do
     namespace :v1 do
-
       # Company and company has nested associations with rvs
       resources :companies
       
@@ -23,6 +13,7 @@ Rails.application.routes.draw do
 
       # User and user has nested association with reservation
       resources :users
+
 
       resources :users do
         resources :reservations
