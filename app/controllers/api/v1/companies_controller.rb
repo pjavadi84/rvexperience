@@ -1,10 +1,10 @@
 class Api::V1::CompaniesController < ApplicationController
-    before_action :authenticate_company!
+    # before_action :authenticate_company!
     
 
     def index
         @companies = Company.all
-        render json: @companies, status: 200
+        render json: @companies.to_json, status: 200
     end
 
     def new

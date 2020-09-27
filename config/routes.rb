@@ -23,6 +23,14 @@ Rails.application.routes.draw do
         resources :comments
       end
 
+      resources :users do
+        resources :destinations
+      end
+
+      resources :users do
+        resources :likes
+      end
+
       # RVs and Rv has nested association with reservations
       resources :rvs
 

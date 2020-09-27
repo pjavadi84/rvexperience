@@ -7,7 +7,7 @@ class Rv < ApplicationRecord
     
     has_many :likes
 
-    belongs_to :company
+    belongs_to :company, optional: true
 
     has_one_attached :image
 

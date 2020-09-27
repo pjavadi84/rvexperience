@@ -5,17 +5,44 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+# require 'active_record/fixtures'
+# Fixtures.create_fixtures("#{Rails.root}/test/fixtures", "operating_systems")
+
 User.destroy_all
 Company.destroy_all
+
+
 
 50.times do 
     User.create({
         first_name: Faker::Name.unique.first_name,
         email: Faker::Internet.unique.email,
-        password: Faker::Internet.unique.email,
-        last_name: Faker::Name.unique.last_name  
+        last_name: Faker::Name.unique.last_name,
+        address: Faker::Address.street_address,
+        city: Faker::Address.city,
+        state: Faker::Address.state,
+        country: Faker::Address.country,
+        zipcode: Faker::Address.zip_code
     })
+
+    
 end
+
+50.times do
+    Company.create({
+        name: Faker::Company.unique.name,
+        building_number: Faker::Address.building_number,
+        address: Faker::Address.street_name,
+        city: Faker::Address.city,
+        state: Faker::Address.state,
+        zipcode: Faker::Address.zip_code,
+        phonenumber: Faker::PhoneNumber.cell_phone
+
+    })
+
+end
+    
+
 
 
 
