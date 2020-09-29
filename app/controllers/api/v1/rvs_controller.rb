@@ -1,33 +1,44 @@
 class Api::V1::RvsController < ApplicationController
     def index
-        if params[:company_id]
-            @rvs = Company.find(params[:company_id]).rvs
+        @companies = Company.all
+        if rv_params[:company_id]
+            @rvs = Company.find(rv_params[:company_id]).rvs
+            render json: @rvs
         else
-            @rvs = Rv.all
+            render json: @companies
         end
     end
 
     def new
-        if params[:company_id] && Company.exists?(params[:company_id])
-            render json: @rvs
+        @companies = Company.all
+        @company = Company.find(rv_params[:company_id])
+        if @company
+            @rv = Rv.new(rv_params)
         else
-            @rv = Rv.new(company_id: params[:company_id])
+            render json: @companies
         end
-        # @rv = Rv.new(company_id: params[:company_id])
     end
 
     def create
-        @rv = Rv.new(rv_params)
-        if @rv.save
+        @companies = Company.all
+        @company = Company.find(rv_params[:company_id])
+        if @company
+            @rv = @company.rvs.create(rv_params)
             render json: @rv, status: 200
         else
-            render json: @rvs, status: 200
+            render json: @companies, status: 200
         end
     end
 
     def show 
-        @rv = Rv.find_by_id(params[:id])
-        render json: @rv, status: 200
+        @companies = Company.all 
+        @company = Company.find(rv_params[:company_id])
+        if @company
+            @rv = @company.rvs.find(rv_params)
+            render json: @rv, status: 200
+        else
+            render json: @companies, status: 200
+        end
     end
 
     # I AM NOT SURE HOW TO SET UP EDIT ACTION FOR RVS"

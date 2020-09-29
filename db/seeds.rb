@@ -10,7 +10,7 @@
 
 User.destroy_all
 Company.destroy_all
-
+Rv.destroy_all
 
 
 50.times do 
@@ -29,7 +29,7 @@ Company.destroy_all
 end
 
 50.times do
-    Company.create({
+    company = Company.create({
         name: Faker::Company.unique.name,
         building_number: Faker::Address.building_number,
         address: Faker::Address.street_name,
@@ -38,15 +38,9 @@ end
         zipcode: Faker::Address.zip_code,
         phonenumber: Faker::PhoneNumber.cell_phone
 
-    })
-
+    })   
 end
-    
 
-
-
-
-
-# (1..200).to_a.each do |user|
-#     User.find_or_create_by(first_name: "amirhossein", last_name: "Ghaffarkhan", age: 38, number_of_guests: 3, address: "3592 huntington blvd", city: "huntington")
-# end
+company666 = Company.create(name: "Haj Ali", address: "4828 main street", city: "Torrance")
+rv666 = Rv.create(make: "Airstream", model: "AX350", length: 200, width: 90, height: 98, fuel_type: "diesel", company_id: company666)
+# company666.rvs.create(make: "Airstream", model: "AX350", length: 200, width: 90, height: 98, fuel_type: "diesel")

@@ -11,8 +11,12 @@ class Company < ApplicationRecord
     # has_many :likes 
 
     # accepts_nested_attributes_for :rvs, allow_destroy: true, reject_if: :all_blank
-    accepts_nested_attributes_for :rvs
+    after_create :make_rvs
 
+    def make_rvs
+        rvs.create
+    end
+    accepts_nested_attributes_for :rvs
     accepts_nested_attributes_for :reservations
     
 end
