@@ -1,12 +1,16 @@
 class Api::V1::RvsController < ApplicationController
     def index
-        @companies = Company.all
-        if rv_params[:company_id]
-            @rvs = Company.find(rv_params[:company_id]).rvs
-            render json: @rvs
-        else
-            render json: @companies
-        end
+        
+        # @companies = Company.all
+        # if rv_params[:company_id]
+        #     @rvs = Company.find(rv_params[:company_id]).rvs
+        #     binding.pry
+        #     render json: @rvs
+        # else
+        #     render json: @companies
+        # end
+        @rvs = Rv.all
+        render json: @rvs.to_json, status: 200
     end
 
     def new
@@ -31,14 +35,20 @@ class Api::V1::RvsController < ApplicationController
     end
 
     def show 
-        @companies = Company.all 
-        @company = Company.find(rv_params[:company_id])
-        if @company
-            @rv = @company.rvs.find(rv_params)
-            render json: @rv, status: 200
-        else
-            render json: @companies, status: 200
-        end
+        # @companies = Company.all 
+        # @company = Company.find(rv_params[:company_id])
+        # if @company
+            
+        #     rv = Rv.find_by(id: params[:id])
+            
+        #     render json: {id: rv.id, company: rv.company}
+        #     # @rv = @company.rvs.find(rv_params)
+        #     # render json: @rv, status: 200
+        # else
+        #     render json: @companies, status: 200
+        # end
+        rv = Rv.find_by(id: params[:id])
+        render json: rv.to_json, status: 200
     end
 
     # I AM NOT SURE HOW TO SET UP EDIT ACTION FOR RVS"
@@ -76,6 +86,8 @@ class Api::V1::RvsController < ApplicationController
     private 
 
     def rv_params
-        params.require(:rv).permit(:make, :model, :length, :width, :height, :fuel_type, :capacity, :air_conditioner, :jacuzzi, :shower, :washer_dryer, :internet, :current_mile, :plate_number, :vin_number, :company_id, :image)
+        # binding.pry
+        # params.require(:rv).permit(:name, :capacity, :rate_per_day, :company_id)
+        params.permit(:name, :capacity, :rate_per_day, :company_id)
     end
 end

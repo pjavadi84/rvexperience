@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_27_072712) do
+ActiveRecord::Schema.define(version: 2020_10_06_053943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,24 +103,13 @@ ActiveRecord::Schema.define(version: 2020_09_27_072712) do
   end
 
   create_table "rvs", force: :cascade do |t|
-    t.string "make"
-    t.string "model"
-    t.integer "length"
-    t.integer "width"
-    t.integer "height"
-    t.string "fuel_type"
-    t.integer "capacity"
-    t.boolean "air_conditioner"
-    t.boolean "jacuzzi"
-    t.boolean "shower"
-    t.boolean "washer_dryer"
-    t.boolean "internet"
-    t.integer "current_mile"
+    t.bigint "company_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "plate_number"
-    t.string "vin_number"
-    t.integer "company_id"
+    t.string "name"
+    t.integer "capacity"
+    t.float "rate_per_day"
+    t.index ["company_id"], name: "index_rvs_on_company_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -140,4 +129,5 @@ ActiveRecord::Schema.define(version: 2020_09_27_072712) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "rvs", "companies"
 end

@@ -5,7 +5,7 @@ class Company < ApplicationRecord
     # has_many :reservations , through: :rvs
     
     has_many :rvs
-    has_many :reservations, through: :rvs
+    # has_many :reservations, through: :rvs
 
     # at  some point i want to render a page where user can like company
     # has_many :likes 
@@ -17,6 +17,6 @@ class Company < ApplicationRecord
         rvs.create
     end
     accepts_nested_attributes_for :rvs
-    accepts_nested_attributes_for :reservations
+    # accepts_nested_attributes_for :reservations
     
 end

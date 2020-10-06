@@ -41,6 +41,9 @@ end
     })   
 end
 
-company666 = Company.create(name: "Haj Ali", address: "4828 main street", city: "Torrance")
-rv666 = Rv.create(make: "Airstream", model: "AX350", length: 200, width: 90, height: 98, fuel_type: "diesel", company_id: company666)
+# zionite = Company.create(name: "zionite", address: "49390 main street", city: "Torrance")
+# airstream = Rv.create(name: "Airstream", capacity: 12, rate_per_day: 120.55, company: zionite)
 # company666.rvs.create(make: "Airstream", model: "AX350", length: 200, width: 90, height: 98, fuel_type: "diesel")
+
+voyeger = Company.create(name: "Voyeger", address: "958 s main street", city: "Culver City")
+astonG3 = Rv.create(name: "AstonG3", capacity: 8, rate_per_day: 85.00, company: voyeger)
