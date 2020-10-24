@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.1'
-
+gem 'fast_jsonapi'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 
@@ -39,7 +39,7 @@ group :development do
   # gem 'spring-watcher-listen', '~> 2.0.0'
   # gem "google-cloud-storage", "~> 1.11", require: false
   # gem 'simple_token_authentication', '~> 1.0'
-  gem 'fast_jsonapi'
+  
   gem 'active_model_serializers'
 end
 

@@ -16,7 +16,8 @@ class Company < ApplicationRecord
     def make_rvs
         rvs.create
     end
+    
     accepts_nested_attributes_for :rvs
     # accepts_nested_attributes_for :reservations
-    
+    validates :first_name, :last_name, :age, :number_of_guests, :address, :city, :state, :country, :zipcode, :email, :phone_number, presence: true 
 end

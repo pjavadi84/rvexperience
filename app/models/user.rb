@@ -10,4 +10,6 @@ class User < ApplicationRecord
     
 
     accepts_nested_attributes_for :reservations, :comments, :destinations, :likes, allow_destroy: true, reject_if: proc{|attribute| attribute['first_name'].blank?}
+
+    validates :first_name, :last_name, :age, :number_of_guests, :address, :city, :state, :country, :zipcode, :email, :phone_number, presence: true
 end

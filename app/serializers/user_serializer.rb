@@ -7,5 +7,5 @@ class UserSerializer < ActiveModel::Serializer
     has_many :destinations
     has_many :likes
     
-  attributes :first_name, :last_name, :age, :number_of_guests, :address, :city, :state, :country, :zipcode, :phone_number
+  attributes :id, :first_name, :last_name, :age, :number_of_guests, :address, :city, :state, :country, :zipcode, :phone_number
 end

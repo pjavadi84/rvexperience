@@ -23,8 +23,14 @@ class Api::V1::CompaniesController < ApplicationController
     end
 
     def show
-        @company = Company.find_by_id(params[:id])
-        render json: @company, status: 200
+        # binding.pry
+        @company = Company.find_by(id: params[:id])
+        options = {include: [:rvs]}
+        if @company
+            render json: CompanySerializer.new(@company).serialized_json
+        else
+            render json: {message: "No company found!"}
+        end
     end
 
     

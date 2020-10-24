@@ -1,16 +1,8 @@
 class Api::V1::RvsController < ApplicationController
+
     def index
-        
-        # @companies = Company.all
-        # if rv_params[:company_id]
-        #     @rvs = Company.find(rv_params[:company_id]).rvs
-        #     binding.pry
-        #     render json: @rvs
-        # else
-        #     render json: @companies
-        # end
-        @rvs = Rv.all
-        render json: @rvs.to_json, status: 200
+        rvs = Rv.all
+        render json: RvSerializer.new(rvs)
     end
 
     def new
@@ -19,36 +11,30 @@ class Api::V1::RvsController < ApplicationController
         if @company
             @rv = Rv.new(rv_params)
         else
-            render json: @companies
+            render json: RvSerializer.new(rvs).to_serialized_json
         end
     end
 
     def create
-        @companies = Company.all
+
         @company = Company.find(rv_params[:company_id])
         if @company
             @rv = @company.rvs.create(rv_params)
             render json: @rv, status: 200
         else
-            render json: @companies, status: 200
+            render json: RvSerializer.new(rvs).to_serialized_json
         end
     end
 
     def show 
-        # @companies = Company.all 
-        # @company = Company.find(rv_params[:company_id])
-        # if @company
-            
-        #     rv = Rv.find_by(id: params[:id])
-            
-        #     render json: {id: rv.id, company: rv.company}
-        #     # @rv = @company.rvs.find(rv_params)
-        #     # render json: @rv, status: 200
-        # else
-        #     render json: @companies, status: 200
-        # end
         rv = Rv.find_by(id: params[:id])
-        render json: rv.to_json, status: 200
+        options = {include: [:company]}
+        if rv
+            # render json: RvSerializer.new(rv).to_serialized_json
+            render json: RvSerializer.new(rv, options)
+        else
+            render json: {message: "No RV found!"}
+        end
     end
 
     # I AM NOT SURE HOW TO SET UP EDIT ACTION FOR RVS"
