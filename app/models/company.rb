@@ -11,6 +11,8 @@ class Company < ApplicationRecord
     # has_many :likes 
 
     # accepts_nested_attributes_for :rvs, allow_destroy: true, reject_if: :all_blank
+    
+    before_create -> {self.token = generate_token}
     after_create :make_rvs
 
     def make_rvs
@@ -20,4 +22,13 @@ class Company < ApplicationRecord
     accepts_nested_attributes_for :rvs
     # accepts_nested_attributes_for :reservations
     validates :first_name, :last_name, :age, :number_of_guests, :address, :city, :state, :country, :zipcode, :email, :phone_number, presence: true 
+    
+    private
+    
+    def generate_token
+        loop do
+            token = SecureRandom.hex
+            return token unless User.exists?({token: token})
+        end
+    end
 end

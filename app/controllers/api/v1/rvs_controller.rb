@@ -1,7 +1,9 @@
 class Api::V1::RvsController < ApplicationController
 
     def index
-        rvs = Rv.all
+        # rvs = Rv.all
+        rvs = Rv.order('created_at DESC')
+        
         render json: RvSerializer.new(rvs)
     end
 
