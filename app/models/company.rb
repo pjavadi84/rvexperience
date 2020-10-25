@@ -21,7 +21,7 @@ class Company < ApplicationRecord
     
     accepts_nested_attributes_for :rvs
     # accepts_nested_attributes_for :reservations
-    validates :first_name, :last_name, :age, :number_of_guests, :address, :city, :state, :country, :zipcode, :email, :phone_number, presence: true 
+    validates :name, presence: true
     
     private
     

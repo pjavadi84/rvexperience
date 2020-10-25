@@ -1,4 +1,6 @@
 class Api::V1::RvsController < ApplicationController
+    include ActionController::HttpAuthentication::Token::ControllerMethods
+    before_action :authenticate, only: [:create, :destroy]
 
     def index
         # rvs = Rv.all
@@ -18,14 +20,19 @@ class Api::V1::RvsController < ApplicationController
     end
 
     def create
-
-        @company = Company.find(rv_params[:company_id])
-        if @company
-            @rv = @company.rvs.create(rv_params)
-            render json: @rv, status: 200
+        @rv = @company.rvs.new(rv_params)
+        if @rv.save
+            render json: @rv, status: :created
         else
-            render json: RvSerializer.new(rvs).to_serialized_json
+            render json: @rv.errors, status: :unprocessable_entity
         end
+        # @company = Company.find(rv_params[:company_id])
+        # if @company
+        #     @rv = @company.rvs.create(rv_params)
+        #     render json: @rv, status: 200
+        # else
+        #     render json: RvSerializer.new(rvs).to_serialized_json
+        # end
     end
 
     def show 
@@ -77,5 +84,11 @@ class Api::V1::RvsController < ApplicationController
         # binding.pry
         # params.require(:rv).permit(:name, :capacity, :rate_per_day, :company_id)
         params.permit(:name, :capacity, :rate_per_day, :company_id)
+    end
+
+    def authenticate
+        authenticate_or_request_with_http_token do |token, options|
+            @company = Company.find_by(token: token)
+          end
     end
 end

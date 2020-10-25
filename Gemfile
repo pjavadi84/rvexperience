@@ -39,7 +39,8 @@ group :development do
   # gem 'spring-watcher-listen', '~> 2.0.0'
   # gem "google-cloud-storage", "~> 1.11", require: false
   # gem 'simple_token_authentication', '~> 1.0'
-  
+  gem 'faraday'
+  gem 'oj'
   gem 'active_model_serializers'
 end
 
