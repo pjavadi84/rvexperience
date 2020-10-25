@@ -3,19 +3,18 @@ class Api::V1::RvsController < ApplicationController
     before_action :authenticate, only: [:create, :destroy]
 
     def index
-        # rvs = Rv.all
-        rvs = Rv.order('created_at DESC')
+        rvs = Rv.all
         
         render json: RvSerializer.new(rvs)
     end
 
     def new
-        @companies = Company.all
-        @company = Company.find(rv_params[:company_id])
-        if @company
-            @rv = Rv.new(rv_params)
+        company = Company.find(rv_params[:company_id])
+        if company
+            rv = Rv.new(rv_params)
+            render json: RvSerializer.new(rv), status: 200
         else
-            render json: RvSerializer.new(rvs).to_serialized_json
+            render json: rv.errors, status: :unprocessable_entity
         end
     end
 

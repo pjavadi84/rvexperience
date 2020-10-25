@@ -7,8 +7,8 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def new
-        @user = User.new
-        @reservation = @user.reservations.build
+        user = User.new
+        reservation = user.reservations.build
     end
 
     def create 
