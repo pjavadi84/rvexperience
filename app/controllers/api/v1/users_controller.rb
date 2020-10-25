@@ -1,8 +1,8 @@
 class Api::V1::UsersController < ApplicationController
 
     def index 
-        @users = User.all
-        render json:  @users.to_json, status: 200
+        users = User.all
+        render json:  UserSerializer.new(users), status: 200
         # binding.pry
     end
 
@@ -12,12 +12,14 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def create 
-        @user = User.new(user_params)
-        if @user.save
+        user = User.new(user_params)
+        rvs = params[:rvs].map{|rv| rv.find_or_create_by(name: rv)}
+        user.rvs << rvs
+        if user.save
             flash[:success] = "successfully created a user"
-            render json: @user, status: 200
+            render json: UserSerializer.new(user), status: 200
         else
-            render json: @users, status: 200
+            render json: user.errors, status: :unprocessable_entity
         end
     end
 

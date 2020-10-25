@@ -83,7 +83,7 @@ class Api::V1::RvsController < ApplicationController
     def rv_params
         # binding.pry
         # params.require(:rv).permit(:name, :capacity, :rate_per_day, :company_id)
-        params.permit(:name, :capacity, :rate_per_day, :company_id)
+        params.permit(:name, :capacity, :rate_per_day, :company_id, :image_link)
     end
 
     def authenticate

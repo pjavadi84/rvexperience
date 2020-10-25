@@ -1,7 +1,7 @@
 require 'faraday'
 require 'oj'
 
-company = Faraday.new(url: 'http://localhost:3000') do |config|
+company = Faraday.new(url: 'http://localhost:3000/api/v1/companies') do |config|
     config.adapter Faraday.default_adapter
     config.token_auth('5dc72b1ad1335db2c54dc960e56dc58d')
 end
