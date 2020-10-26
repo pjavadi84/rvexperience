@@ -1,58 +1,41 @@
 class Api::V1::CompaniesController < ApplicationController
-    # before_action :authenticate_company!
-    
-
+    before_action :company_authorized, only: [:auto_login]
     def index
-        @companies = Company.all
-        render json: @companies.to_json, status: 200
+        companies = Company.all 
+        render json: companies, status: 200
     end
-
-    def new
-        @company = Company.new
-        @rv = @company.rvs.build
-        # @reservation = @company.reservations.build
-    end
-
+  # REGISTER
     def create
-        @company = Company.new(company_params)
-        if @company.save
-            render json: @company.to_json, status: :created
+        company = Company.create(company_params)
+        if company.valid?
+        token = encode_token({company_id: company.id})
+        render json: {company: company, token: token}
         else
-            render json: @company.errors, status: :unprocessable_entity
+        render json: {error: "Invalid username or password for company"}
         end
     end
 
-    def show
-        # binding.pry
-        @company = Company.find_by(id: params[:id])
-        options = {include: [:rvs]}
-        if @company
-            render json: CompanySerializer.new(@company).serialized_json
-        else
-            render json: {message: "No company found!"}
-        end
-    end
+  # LOGGING IN
+  def login
+    company = Company.find_by(email: params[:email])
 
-    
-    def update
-        @company = Company.find(params[:id])
-        @company.update(company_params)
+    if company && company.authenticate(params[:password])
+      token = encode_token({company_id: company.id})
+      render json: {company: company, token: token}
+    else
+      render json: {error: "Invalid username or password"}
     end
+  end
 
-    def destroy
-        @company = Company.find_by_id(params[:id])
-        @company.destroy
-    end
 
-    # def rvs_index
-    #     @company = Company.find(params[:id])
-    #     @rvs = @company.rvs
-    #     render json: @rvs, status: 200
-    # end
+  def auto_login
+    render json: company
+  end
+
 
 private
     def company_params
-        params.require(:company).permit(:name, :address, :city, :state, :zipcode, :phonenumber, :building_number, rv_attributes: [
+        params.require(:company).permit(:name, :email, :password, :address, :city, :state, :zipcode, :phonenumber, :building_number, rv_attributes: [
             :name,
             :capacity,
             :rate_per_day

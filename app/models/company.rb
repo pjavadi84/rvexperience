@@ -5,6 +5,8 @@ class Company < ApplicationRecord
     # has_many :reservations , through: :rvs
     has_secure_password 
     has_many :rvs, dependent: :destroy
+
+    validates :email, uniqueness: { case_sensitive: false }
     # has_many :reservations, through: :rvs
 
     # at  some point i want to render a page where user can like company
