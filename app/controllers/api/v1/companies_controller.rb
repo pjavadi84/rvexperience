@@ -1,17 +1,32 @@
 class Api::V1::CompaniesController < ApplicationController
     before_action :company_authorized, only: [:auto_login]
+    
     def index
-        companies = Company.all 
-        render json: companies, status: 200
+        companies = Company.all
+        # render json: companies.to_json(include: [:rvs])
+        render json: companies.to_json(include: [:rvs])
     end
-  # REGISTER
+  
+    # REGISTER
     def create
-        company = Company.create(company_params)
+        company = Company.new(company_params)
+        # rvs = params[:rvs].map{ |rv| rv.find_or_create_by(name: rv)}
         if company.valid?
-        token = encode_token({company_id: company.id})
-        render json: {company: company, token: token}
+        #     company.rvs << rvs
+            company.save
+            token = encode_token({company_id: company.id})
+            render json: {company: company, token: token}
         else
-        render json: {error: "Invalid username or password for company"}
+            render json: {error: "Invalid username or password for company"}
+        end
+    end
+
+    def show
+        company = Company.find_by(id: params[:id])
+        if company
+            render json: CompanySerializer.new(company), status: 200
+        else
+            render json: company.errors, status: :unprocessable_entity 
         end
     end
 
@@ -38,7 +53,8 @@ private
         params.require(:company).permit(:name, :email, :password, :address, :city, :state, :zipcode, :phonenumber, :building_number, rv_attributes: [
             :name,
             :capacity,
-            :rate_per_day
+            :rate_per_day,
+            :image_link
                 # reservation_attributes: [
                 #     :start_date,
                 #     :end_date,
@@ -53,7 +69,7 @@ private
                 #     :discount_price,
                 #     :additional_notes
                 # ]
-        ]
+    ]
             
         )
     end

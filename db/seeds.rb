@@ -36,9 +36,10 @@ end
         city: Faker::Address.city,
         state: Faker::Address.state,
         zipcode: Faker::Address.zip_code,
-        phonenumber: Faker::PhoneNumber.cell_phone
-
-    })   
+        phonenumber: Faker::PhoneNumber.cell_phone,
+        email: Faker::Internet.email,
+        password: Faker::Internet.password
+    })  
 end
 
 # zionite = Company.create(name: "zionite", address: "49390 main street", city: "Torrance")

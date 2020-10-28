@@ -4,34 +4,21 @@ class Api::V1::RvsController < ApplicationController
 
     def index
         rvs = Rv.all
-        
         render json: RvSerializer.new(rvs)
     end
 
     def new
-        company = Company.find(rv_params[:company_id])
-        if company
-            rv = Rv.new(rv_params)
-            render json: RvSerializer.new(rv), status: 200
-        else
-            render json: rv.errors, status: :unprocessable_entity
-        end
+        
     end
 
     def create
-        @rv = @company.rvs.new(rv_params)
-        if @rv.save
-            render json: @rv, status: :created
+        company = Company.find(params[:id])
+        if company
+            rv = company.rvs.build(rv_params)
+            render json: company, status: 200
         else
-            render json: @rv.errors, status: :unprocessable_entity
+            render json: rv.errors, status: :unprocessable_entity
         end
-        # @company = Company.find(rv_params[:company_id])
-        # if @company
-        #     @rv = @company.rvs.create(rv_params)
-        #     render json: @rv, status: 200
-        # else
-        #     render json: RvSerializer.new(rvs).to_serialized_json
-        # end
     end
 
     def show 
@@ -47,16 +34,7 @@ class Api::V1::RvsController < ApplicationController
 
     # I AM NOT SURE HOW TO SET UP EDIT ACTION FOR RVS"
     # def edit
-    #     company = Company.find_by_id(params[:company_id])
-    #     if company && !company.nil?
-    #             render json: @rvs, status: 200
-    #         else
-    #             @rv = company.rvs.find_by(id: params[:id])
-    #             render json: company.rvs
-    #         end
-    #     else
-    #         @rv = Rv.find(params[:id])
-    #     end
+    #     
     # end
 
     def update
@@ -82,7 +60,7 @@ class Api::V1::RvsController < ApplicationController
     def rv_params
         # binding.pry
         # params.require(:rv).permit(:name, :capacity, :rate_per_day, :company_id)
-        params.permit(:name, :capacity, :rate_per_day, :company_id, :image_link)
+        params.permit(:name, :capacity, :rate_per_day, :company_id, :image_link, :company_id)
     end
 
     def authenticate
