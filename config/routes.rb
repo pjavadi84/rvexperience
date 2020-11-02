@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       # Company and company has nested associations with rvs
-      resources :companies, only: [:index, :create, :show]
+      resources :companies
 
       post "/login", to: "companies#login"
       get "/auto_login", to: "companies#auto_login"

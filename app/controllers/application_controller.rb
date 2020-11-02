@@ -73,14 +73,15 @@
 #         # end
 # end
 class ApplicationController < ActionController::API
-    before_action :company_authorized
+    # before_action :company_authorized
   
     def encode_token(payload)
       JWT.encode(payload, 's3cr3t')
     end
   
     def auth_header
-      # { Authorization: 'Bearer <token>' }
+        # binding.pry
+    #   { Authorization: 'Bearer <token>' }
       request.headers['Authorization']
     end
   
@@ -97,6 +98,7 @@ class ApplicationController < ActionController::API
     end
   
     def logged_in_company
+        
       if decoded_token
         company_id = decoded_token[0]['company_id']
         company = Company.find_by(id: company_id)
@@ -108,6 +110,7 @@ class ApplicationController < ActionController::API
     end
   
     def company_authorized
+        
       render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
     end
   

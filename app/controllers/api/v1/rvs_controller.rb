@@ -8,7 +8,13 @@ class Api::V1::RvsController < ApplicationController
     end
 
     def new
-        
+        company = Company.find(params[:id])
+        if company 
+            rv = Rv.new
+            render json: RvSerializer.new(rvs)
+        else
+            render json: rv.errors, status: :unprocessable_entity
+        end
     end
 
     def create

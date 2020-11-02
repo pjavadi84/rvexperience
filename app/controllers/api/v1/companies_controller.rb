@@ -1,32 +1,35 @@
 class Api::V1::CompaniesController < ApplicationController
-    before_action :company_authorized, only: [:auto_login]
+    # before_action :company_authorized, only: [:auto_login]
     
     def index
         companies = Company.all
+       
         # render json: companies.to_json(include: [:rvs])
-        render json: companies.to_json(include: [:rvs])
+        render json: companies, status: 200
     end
   
     # REGISTER
     def create
         company = Company.new(company_params)
-        # rvs = params[:rvs].map{ |rv| rv.find_or_create_by(name: rv)}
-        if company.valid?
-        #     company.rvs << rvs
-            company.save
-            token = encode_token({company_id: company.id})
-            render json: {company: company, token: token}
+        # binding.pry
+        if company.save
+            
+            # token = encode_token({company_id: company.id})
+            # render json: {company: company, token: token}
+            render json: {company: company}, status: 200
+            
         else
-            render json: {error: "Invalid username or password for company"}
+            render json: {error: company.errors.full_messages}, status: :unprocessable_entity
         end
     end
 
     def show
         company = Company.find_by(id: params[:id])
         if company
-            render json: CompanySerializer.new(company), status: 200
+            render json: company, status: 200
         else
-            render json: company.errors, status: :unprocessable_entity 
+            # render json: company.errors, status: :unprocessable_entity 
+            render json: {message: "No company found!"}
         end
     end
 
