@@ -38,7 +38,7 @@ end
         zipcode: Faker::Address.zip_code,
         phonenumber: Faker::PhoneNumber.cell_phone,
         email: Faker::Internet.email,
-        password: Faker::Internet.password
+        
     })  
 end
 

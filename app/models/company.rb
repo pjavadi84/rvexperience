@@ -7,7 +7,7 @@ class Company < ApplicationRecord
     # has_secure_password 
     accepts_nested_attributes_for :rvs, allow_destroy: true, reject_if: proc{|attribute| attribute['name'].blank?}
     # validates :email, uniqueness: { case_sensitive: false } 
-    validates :email, :name, :address, :phonenumber, uniqueness: true
+    validates :email, :name, uniqueness: true
     validates :name, presence: true
     
     # private

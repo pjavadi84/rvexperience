@@ -33,47 +33,39 @@ class Api::V1::CompaniesController < ApplicationController
         end
     end
 
-  # LOGGING IN
-  def login
-    company = Company.find_by(email: params[:email])
-
-    if company && company.authenticate(params[:password])
-      token = encode_token({company_id: company.id})
-      render json: {company: company, token: token}
-    else
-      render json: {error: "Invalid username or password"}
+    def delete 
+        company = Company.find_by(id: params[:id])
+        company.destroy
+        # binding.pry
+        # if company
+        #     company.delete
+        # else
+        #     render json: {message: "no company found"}
+        # end
     end
-  end
+
+  # LOGGING IN
+#   def login
+#     company = Company.find_by(email: params[:email])
+
+#     if company && company.authenticate(params[:password])
+#       token = encode_token({company_id: company.id})
+#       render json: {company: company, token: token}
+#     else
+#       render json: {error: "Invalid username or password"}
+#     end
+#   end
 
 
-  def auto_login
-    render json: company
-  end
+#   def auto_login
+#     render json: company
+#   end
 
 
 private
     def company_params
         params.require(:company).permit(:name, :email, :password, :address, :city, :state, :zipcode, :phonenumber, :building_number, rv_attributes: [
-            :name,
-            :capacity,
-            :rate_per_day,
-            :image_link
-                # reservation_attributes: [
-                #     :start_date,
-                #     :end_date,
-                #     :pickup_location,
-                #     :dropoff_location,
-                #     :guest_quantity,
-                #     :rental_duration,
-                #     :price_per_night,
-                #     :subtotal,
-                #     :tax,
-                #     :coupon_code,
-                #     :discount_price,
-                #     :additional_notes
-                # ]
-    ]
-            
+            :name, :capacity, :rate_per_day, :image_link]   
         )
     end
 
