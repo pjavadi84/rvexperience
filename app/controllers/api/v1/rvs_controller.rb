@@ -1,10 +1,9 @@
 class Api::V1::RvsController < ApplicationController
-    include ActionController::HttpAuthentication::Token::ControllerMethods
-    before_action :authenticate, only: [:create, :destroy]
 
     def index
         rvs = Rv.all
-        render json: RvSerializer.new(rvs)
+        render json: {rvs: rvs}, status: 200
+        # render json: RvSerializer.new(rvs)
     end
 
     def new
@@ -18,9 +17,10 @@ class Api::V1::RvsController < ApplicationController
     end
 
     def create
-        company = Company.find(params[:id])
+        company = Company.find(params[:company_id])
+        
         if company
-            rv = company.rvs.build(rv_params)
+            rv = company.rvs.create(rv_params)
             render json: company, status: 200
         else
             render json: rv.errors, status: :unprocessable_entity
@@ -38,10 +38,6 @@ class Api::V1::RvsController < ApplicationController
         end
     end
 
-    # I AM NOT SURE HOW TO SET UP EDIT ACTION FOR RVS"
-    # def edit
-    #     
-    # end
 
     def update
         @company = Company.find_by_id(params[:company_id])
@@ -65,13 +61,8 @@ class Api::V1::RvsController < ApplicationController
 
     def rv_params
         # binding.pry
-        # params.require(:rv).permit(:name, :capacity, :rate_per_day, :company_id)
-        params.permit(:name, :capacity, :rate_per_day, :company_id, :image_link, :company_id)
+        params.require(:rv).permit(:name, :capacity, :rate_per_day, :company_id)
+        # params.permit(:name, :capacity, :rate_per_day, :image_link,:company_id)
     end
 
-    def authenticate
-        authenticate_or_request_with_http_token do |token, options|
-            @company = Company.find_by(token: token)
-          end
-    end
 end

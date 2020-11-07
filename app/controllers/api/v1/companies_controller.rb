@@ -11,16 +11,19 @@ class Api::V1::CompaniesController < ApplicationController
     # REGISTER
     def create
         company = Company.new(company_params)
-        # binding.pry
         if company.save
-            
-            # token = encode_token({company_id: company.id})
-            # render json: {company: company, token: token}
-            render json: {company: company}, status: 200
-            
+        # binding.pry
+        # if company.save
+          
+        render json: {company: company}, status: 200
+
         else
-            render json: {error: company.errors.full_messages}, status: :unprocessable_entity
+            render json: {errors: "error found"}
         end
+            
+        # else
+        #     render json: {error: company.errors.full_messages}, status: :unprocessable_entity
+        # end
     end
 
     def show
@@ -33,10 +36,10 @@ class Api::V1::CompaniesController < ApplicationController
         end
     end
 
-    def delete 
+    def destroy 
         company = Company.find_by(id: params[:id])
         company.destroy
-        # binding.pry
+        
         # if company
         #     company.delete
         # else
