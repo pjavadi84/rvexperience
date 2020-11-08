@@ -4,20 +4,29 @@ This Rails project is the backend api built to support this project. RV-Experien
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version: 2.6.1p33
 
-* System dependencies
+*System dependencies:*
+    This is standalone backend project. No system dependencies!
 
-* Configuration
+*Database creation:*
+In your terminal commandline:
 
-* Database creation
+Run "rails db:create"
+Run "rails db:migrate"
 
-* Database initialization
 
-* How to run the test suite
+*Database initialization*
+In your terminal commandline, to start a local server on your machine, run: 
+"rails server"
+this should start local3000 server on your machine.
 
-* Services (job queues, cache servers, search engines, etc.)
+*How to run the test suite*
+There is no test suites generated for this project. It is only used as an api
 
-* Deployment instructions
+*Services (job queues, cache servers, search engines, etc.)*
+NONE
 
-* ...
+WELCOME TO RV-Experience:
+
+![alt text](https://www.google.com/search?q=rvs+stock+photo&tbm=isch&ved=2ahUKEwjc0uDAm_LsAhUcGTQIHfsRAlcQ2-cCegQIABAA&oq=rvs+stock+photo&gs_lcp=CgNpbWcQAzoECCMQJzoCCAA6BggAEAgQHjoECAAQQzoFCAAQsQM6BwgAELEDEEM6BwgjEOoCECc6CAgAELEDEIMBOgQIABAeOgQIABAYUPyUAVj7wgFgnMUBaANwAHgAgAGiAYgB7xCSAQQyMy4zmAEAoAEBqgELZ3dzLXdpei1pbWewAQrAAQE&sclient=img&ei=C4KnX5yhL5yy0PEP-6OIuAU&bih=626&biw=1280#imgrc=kgtQs64ljFDhzM)
