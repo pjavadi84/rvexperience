@@ -29,10 +29,44 @@ NONE
 
 WELCOME TO RV-Experience:
 
-<p align="center">
-  <img src="<p align="center">
-  <img src="your_relative_path_here" width="350" title="hover text">
-  <img src="your_relative_path_here_number_2_large_name" width="350" alt="accessibility text">
-</p>" width="350" title="hover text">
-  
-</p>
+This is an MVP for a simple api for a front end project. You can find the repo for the frontend project here:
+
+***https://github.com/pjavadi84/rv-experience-frontend***
+
+My MVC:
+
+***MODELS***
+company
+rv
+
+stretcher goal models:
+-user
+-reservation
+-likes
+-comments
+-destinations
+
+***CONTROLLER***
+companies
+rvs
+
+**VIEW**
+There is no view, since this is served as an api. 
+
+
+**Why I made this:**
+one of the most important required project studying at Flatiron. 
+
+**What did I learn and you might learn as well:**
+I truly learned how backend and frontend really work together in create a very interacive experience. Although there are much work needed in this project, I truly feel that I learned quiet a lot about JavaScript, and how it can manipulate and create all the magics right in front of user's eyes, but also how Rails on the other side handles the logic of where all these data all being stored, controlled, and routed. 
+
+***STRETCH GOALS***
+1) Building full CRUD that also include edit and delete
+2) Building a user authenticaion using JWT, OAuth, or Omniauth
+3) Building more models, such as users, in which the facilitation of associated data from company to user become possible. This logic is more geared toward users who want to rent RVs of the specific company they are looking at. 
+
+
+I hope you enjoy this project as much as I do, and even contribute and find bugs that can help make this app a great app to use, for yourself, for us, and others!
+
+Thank you
+
